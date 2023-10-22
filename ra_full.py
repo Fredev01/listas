@@ -223,7 +223,10 @@ while opcion != 0:
         print("Has elegido la opción 1. Listas Simple".center(60, ":"))
         print(MSG_LIST)
         opc_list = int(input("Ingresa la opción: "))
+<<<<<<< HEAD
         nueva_listd = doubleList()
+=======
+>>>>>>> c7b829a106880e97b1b32911206ead8bdcd6426b
         lista1 = []  # LISTA PARA INSERCION NO BORRAR
         while opc_list != 5:
             if opc_list == 1:
@@ -232,6 +235,12 @@ while opcion != 0:
                 print("\nDato '{}' insertado en la lista.".format(dat1))
             elif opc_list == 2:
                 print("En lista simple opc2")
+                buscar1=int(input("Ingresa un número entero que desees buscar:"))
+                BUS=(buscar1 in lista1)
+                if BUS == True:
+                    print(f"El número {buscar1} está en la lista." )
+                else:
+                    print(f"El número {buscar1} no está en la lista.")
             elif opc_list == 3:
                 while True:
                     print("Eliminar un dato (A)")
