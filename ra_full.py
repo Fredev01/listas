@@ -92,16 +92,53 @@ class doubleList:
         else:
             print(f"El elemento {x} no se encuentra en la lista.")
 
-    def navegar_lista(self):
+    def consulta_lista_doble(self):
         if self.root is None:
-            print("La lista esta vacia")
+            print("La lista está vacía")
             return
         else:
             apuntador = self.root
             while apuntador is not None:
-                print(apuntador.item, " ")
+                print(apuntador.item, end=" -> ")
                 apuntador = apuntador.siguiente
-
+            print("Fin de la lista.")      
+                 
+    def consulta_posicion_doble(self, posicion):
+        apuntador = self.root
+        indice = 0
+        while apuntador is not None:
+            if indice == posicion:
+                print(f"Valor en la posición {posicion}: {apuntador.item}")
+                return
+            apuntador = apuntador.siguiente
+            indice += 1
+        print(f"No existen valores en la posición {posicion}.")
+        
+    def consultar_lista_doble(self):
+        if self.root is None:
+            print("La lista está vacía")
+        else:
+            apuntador = self.root
+            while apuntador is not None:
+                print(apuntador.item, end=" -> ")
+                apuntador = apuntador.siguiente
+            print("Fin de la lista.")
+            
+    def consultar_lista_simple(self, lista):
+        if len(lista) == 0:
+            print("La lista está vacía")
+        else:
+            for item in lista:
+                print(item, end=" -> ")
+            print("Fin de la lista simple.")
+    
+    def consultar_posicion_lista_simple(self, lista, posicion):
+        if 0 <= posicion < len(lista):
+            elemento = lista[posicion]
+            print(f"Elemento en la posición {posicion}: {elemento}")
+        else:
+            print(f"No existe un elemento en la posición {posicion}.")
+            
     def eliminar_inicio(self):
         if self.root is None:
             print("La lista no contiene Nodos para eliminar")
@@ -148,6 +185,8 @@ class doubleList:
                 self.eliminar_final()
             else:
                 return print("Elemento no encontrado")
+            
+            
 
 
 MSG: str = """
@@ -184,23 +223,50 @@ while opcion != 0:
         print("Has elegido la opción 1. Listas Simple".center(60, ":"))
         print(MSG_LIST)
         opc_list = int(input("Ingresa la opción: "))
-        lista = []  # LISTA PARA INSERCION NO BORRAR
+        nueva_listd = doubleList()
+        lista1 = []  # LISTA PARA INSERCION NO BORRAR
         while opc_list != 5:
             if opc_list == 1:
-                print("En lista simple opc1")
-                Dato = input("Ingrese el dato a insertar: ")
-                lista = lista+[Dato]
-                print("\nDato '{}' insertado en la lista.".format(Dato))
-                print(lista)
+                dat1 = int(input("Ingrese un dato entero a la lista: "))
+                lista1.append(dat1)
+                print("\nDato '{}' insertado en la lista.".format(dat1))
             elif opc_list == 2:
                 print("En lista simple opc2")
             elif opc_list == 3:
-                print("En lista simple opc3")
+                while True:
+                    print("Eliminar un dato (A)")
+                    print("Eliminar el ultimo dato (B)")
+                    op = input("Eliga una opcion: \n")
+                    if op.lower() == "a":
+                        bdt = int(
+                            input("Que dato desea eliminar de la lista: "))
+                        print(f"Dato {bdt} eliminado de la lista \n")
+                        lista1.remove(bdt)
+                        break
+                    elif op.lower() == "b":
+                        lista1.pop()
+                        break
+                    else:
+                        print("Solo puede ingresar (A/B)")
             elif opc_list == 4:
-                print("En lista simple opc4")
+                print("Has elegido la opción 4. Consultar".center(60, ":"))
+                print("A. Lista completa")
+                print("B. Consultar por posición")
+                sub_opcion = input("¿Qué opción deseas (A/B)? ").upper()
+
+                if sub_opcion == "A":
+                    nueva_listd.consultar_lista_simple(lista1)
+                elif sub_opcion == "B":
+                    posicion = int(input("Ingresa la posición que deseas consultar: "))
+                    nueva_listd.consultar_posicion_lista_simple(lista1, posicion)
+                else:
+                    print("Opción no válida. Regresando al menú principal.")
+                    
             print("Has elegido la opción 1. Listas Simple".center(60, ":"))
             print(MSG_LIST)
             opc_list = int(input("Ingresa la opción: "))
+            
+            
     elif opcion == 2:
         print("Has elegido la opción 2. Lista Doblemente Ligada".center(70, ":"))
         print(MSG_LIST)
@@ -246,7 +312,19 @@ while opcion != 0:
                     item_del = int(input("Ingresa el elemento a eliminar: "))
                     nueva_listd.eliminar_elemento(item_del)
             elif opc_list == 4:
-                nueva_listd.navegar_lista()
+                print("Has elegido la opción 4. Consultar".center(60, ":"))
+                print("A. Lista completa")
+                print("B. Consultar por posición")
+                sub_opcion = input("¿Qué opción deseas (A/B)? ").upper()
+
+                if sub_opcion == "A":
+                    nueva_listd.consulta_lista_doble()  
+                elif sub_opcion == "B":
+                    posicion = int(input("Ingresa la posición que deseas consultar: "))
+                    nueva_listd.consulta_posicion_doble(posicion)  
+                else:
+                    print("Opción no válida. Regresando al menú principal.")
+                                   
             print("Has elegido la opción 2. Lista Doblemente Ligada".center(70, ":"))
             print(MSG_LIST)
             opc_list = int(input("Ingresa la opción: "))
